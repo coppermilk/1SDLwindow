@@ -4,6 +4,7 @@
 class TextureManager
 {
 public: 
-	static SDL_Texture* pLoadTexture(const char * pFileName, SDL_Renderer * pRenderer);
+	static SDL_Texture* pLoadTexture(const char * pFileName);
+	static void DrawMap(SDL_Texture * pTex, SDL_Rect src, SDL_Rect dst);
 };
 

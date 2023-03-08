@@ -1,9 +1,15 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include <iostream>
+#include "Map.h"
 
-SDL_Texture* pPlayerTex;
-SDL_Rect srcR, destR;
+#include "GameObject.h"
+
+GameObject* pPlayer;
+GameObject* pEnemy;
+Map* pMap;
+SDL_Renderer* Game::pRenderer = nullptr;
+
 
 Game::Game()
 {
@@ -48,17 +54,17 @@ void Game::init(const char* title, int xpos, int ypos, int width, int heigt, boo
 	else {
 		isRunning = false;
 	}
-	pPlayerTex = TextureManager::pLoadTexture("assets/player.png", pRenderer);
+	pPlayer = new GameObject("assets/player.png", 42, 42);
+	pEnemy = new GameObject("assets/enemy.png", 82, 82);
+	pMap = new Map();
 
-	}
-
+}
 void Game::update()
 {
-	++cnt;
-	destR.h = 64;
-	destR.w = 64;
-	std::cout << cnt << std::endl;
-	destR.x = cnt;
+	pPlayer->Update();
+	pEnemy->Update();
+	
+	
 }
 
 void Game::clean()
@@ -73,7 +79,9 @@ void Game::clean()
 void Game::render()
 {
 	SDL_RenderClear(pRenderer);
-	SDL_RenderCopy(pRenderer, pPlayerTex,NULL, &destR);
+	pMap->DrawMap();
+	pPlayer->Render();
+	pEnemy->Render();
 	SDL_RenderPresent(pRenderer);
 
 }
