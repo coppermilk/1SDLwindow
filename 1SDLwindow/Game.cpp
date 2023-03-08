@@ -48,6 +48,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int heigt, boo
 
 void Game::update()
 {
+	++cnt;
+	std::cout << cnt << std::endl;
 }
 
 void Game::clean()

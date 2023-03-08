@@ -14,6 +14,7 @@ public:
 
 	bool running();
 private:
+	int cnt;
 	bool isRunning;
 	SDL_Window* pWindow;
 	SDL_Renderer* pRenderer;
