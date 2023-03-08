@@ -1,6 +1,7 @@
 
 #include <SDL.h>
 #include "Game.h"
+
 #undef main
 
 Game* game = nullptr;
