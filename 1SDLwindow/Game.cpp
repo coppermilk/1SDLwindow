@@ -4,12 +4,16 @@
 #include "Map.h"
 
 #include "GameObject.h"
+#include "ECS.h"
+#include "Componets.h"
 
 GameObject* pPlayer;
 GameObject* pEnemy;
 Map* pMap;
 SDL_Renderer* Game::pRenderer = nullptr;
 
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 Game::Game()
 {
@@ -57,12 +61,16 @@ void Game::init(const char* title, int xpos, int ypos, int width, int heigt, boo
 	pPlayer = new GameObject("assets/player.png", 42, 42);
 	pEnemy = new GameObject("assets/enemy.png", 82, 82);
 	pMap = new Map();
+	newPlayer.addComponent<PositionComponets>();
+	
 
 }
 void Game::update()
 {
 	pPlayer->Update();
 	pEnemy->Update();
+	manager.update();
+	std::cout << newPlayer.getComponent<PositionComponets>().x() << "," << newPlayer.getComponent<PositionComponets>().y() << std::endl;
 	
 	
 }
